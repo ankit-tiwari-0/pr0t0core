@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prank Download</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #2c3e50, #00060a);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Glass Card */
+    .glass-card {
+      background: rgba(34, 33, 33, 0.15);
+      border-radius: 15px;
+      padding: 8vw; /* scales with screen */
+      width: 90%;
+      max-width: 320px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .glass-card h2 {
+      margin-bottom: 30px;
+  font-size: clamp(18px, 5vw, 28px);
+    }
+
+    .progress-container {
+      width: 100%;
+      background: rgba(24, 23, 23, 0.2);
+      height: 6vw;
+      max-height: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 4vw;
+      border: 1px solid rgba(106, 95, 95, 0.3);
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(to right, #212321, #ff0008);
+      transition: width 0.3s ease;
+    }
+
+    .percent {
+      font-size: 5vw;
+      font-weight: bold;
+    }
+
+    /* Prank Page */
+    .prank-page {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      color: red;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: monospace;
+      text-align: center;
+      z-index: 10;
+      display: none;
+      animation: flicker 0.2s infinite alternate;
+      padding: 5vw;
+    }
+
+    .prank-page h1 {
+      font-size: 8vw;
+      margin-bottom: 5vw;
+    }
+
+    .red-text {
+      font-size: 6vw;
+      font-weight: bold;
+      color: #ff0000;
+      margin: 4vw 0;
+    }
+
+    @keyframes flicker {
+      from { opacity: 0.8; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Download Box -->
+  <div class="glass-card" id="download-box">
+    <h2>Downloading...</h2>
+    <div class="progress-container">
+      <div class="progress-bar"></div>
+    </div>
+    <div class="percent" id="percent-Text">0%</div>
+  </div>
+
+  <!-- Prank Page -->
+  <div class="prank-page" id="prank-page">
+    <h1>⚠️ Your Device is Compromised ⚠️</h1>
+    <p>Detected: Pegasus Spyware</p>
+    <p class="red-text">DANGEROUS MALWARE ACTIVE!</p>
+    <p>Shutting down system...</p>
+    <audio id="alert-sound" src="https://www.soundjay.com/button/beep-07.wav"></audio>
+  </div>
+
+  <script>
+    let count = 0;
+    let progress = document.querySelector(".progress-bar");
+    let per = document.querySelector("#percent-Text");
+
+    let interval = setInterval(function () {
+      if (count < 100) {
+        count++;
+        progress.style.width = `${count}%`;
+        per.textContent = `${count}%`;
+      } else {
+        clearInterval(interval);
+
+        // Hide download box
+        document.getElementById("download-box").style.display = "none";
+
+        // Show prank page
+        document.getElementById("prank-page").style.display = "flex";
+
+        // Play scary beep
+        document.getElementById("alert-sound").play();
+      }
+    }, 10000 / 100);
+  </script>
+</body>
+</html>
